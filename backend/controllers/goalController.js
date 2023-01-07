@@ -46,16 +46,28 @@ const updateGoal = asyncHandler(async (req, res) => {
     throw new Error('Goal not found!')
   }
 
+  /****** No need to find the user, only need the id, can do that
+   * in the next 'if(statement)'
   const user = await User.findById(req.user.id)
+ *****************/
 
-  // Check for user
-  if (!user) {
-    res.status(400)
+
+  /***********
+   Check for user, with req object
+   * NO
+   // if (!user) {
+
+   * YES
+   * if (! req.user) {}
+ ***********************************/
+
+   if (!req.user) {
+  res.status(400)
     throw new Error('User not found')
   }
 
   // Make sure the logged in user matches the goal user
-  if (goal.user.toString() !== user.id) {
+  if (goal.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
@@ -78,17 +90,29 @@ const deleteGoal = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Goal not found!')
   }
-
+  /****** No need to find the user, only need the id, can do that
+   * in the next 'if(statement)'
   const user = await User.findById(req.user.id)
+ *****************/
 
-  // Check for user
-  if (!user) {
+
+  /***********
+   Check for user, with req object
+   * NO
+   // if (!user) {
+
+   * YES
+   * if (! req.user) {}
+ ***********************************/
+
+  // Check for user, just like in the update
+  if (!req.user) {
     res.status(400)
     throw new Error('User not found')
   }
 
   // Make sure the logged in user matches the goal user
-  if (goal.user.toString() !== user.id) {
+  if (goal.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
@@ -99,7 +123,12 @@ const deleteGoal = asyncHandler(async (req, res) => {
    *    goal.remove()
    *******************************************************************/
 
-  // res.status(200).json({message: `DELETE, via function in controller! Deleted your goal ${req.params.id}`})
+  /***** This res() is for in the early stages testing with Postman 
+   * 
+   res.status(200).json({message: `DELETE, via function in controller! Deleted your goal ${req.params.id}`})
+   * 
+  **************/
+
   res.status(200).json({id: req.params.id, message: `The goal with this id ${req.params.id} was just deleted!`})
 })
 

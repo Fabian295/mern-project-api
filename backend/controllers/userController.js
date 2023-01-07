@@ -73,16 +73,36 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route         GET /api/users/me
 // @access        Private
 const getMe = asyncHandler(async (req, res) => {
-  const { _id, name, email } = await User.findById(req.user.id)
-  // const { _id, name, email } = await User.findById(req.body)
-  // res.status(200).json({message: 'User get me data'})
-  res.status(200).json({
-    id: _id,
-    name,
-    email,
-  })
 
-  // res.status(200).json(req.user)
+/*****  AAfter haaave made the middleware and getting the user from theere, no need for getting the user her again
+ * 
+const { _id, name, email } = await User.findById(req.user.id)
+ * 
+ * 
+const { _id, name, email } = await User.findById(req.body)
+ * 
+ ****************/
+
+
+/***** Usecase is just to begin with checking if endpoint works
+ * 
+res.status(200).json({message: 'User get me data'})
+ * 
+*********************/
+
+  // res.status(200).json({
+  //   id: _id,      
+  //   name,
+  //   email,
+  // })
+
+/******** No need to get the user in seperate parts, 
+ *  meaning these parts: {req.user.id, req.user.name, req.user.email},
+ * 
+ * Just get the user all together, req.user 
+ *********************************************/
+
+ res.status(200).json(req.user)
 })
 
 // Generate JWT
