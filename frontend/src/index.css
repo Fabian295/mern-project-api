@@ -101,6 +101,10 @@ h3 {
   color: #aeadad;
 }
 
+span.welcome {
+  color: dodgerblue;
+}
+
 .goals {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -108,7 +112,7 @@ h3 {
 }
 
 .goal {
-  background-color: #f4f4f4;
+  background-color: #1c1b1b;
   margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
@@ -119,6 +123,7 @@ h3 {
   top: 10px;
   right: 15px;
   cursor: pointer;
+  color: crimson;
   border: none;
   background: none;
 }
@@ -131,6 +136,7 @@ h3 {
 
 .form-group {
   margin-bottom: 10px;
+  position: relative;
 }
 
 .form-group input,
@@ -148,6 +154,40 @@ h3 {
   text-align: left;
   display: block;
   margin: 0 0 5px 3px;
+}
+
+.form-group .input-effect {
+  position: relative;
+  background: none;
+  outline: none;
+  color: #fff;
+}
+.form-group .label-effect {
+  background: #252525;
+  padding: 3px 8px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transition: top .3s ease-in, left .3s ease,
+  font-size .3s ease-in-out;
+}
+
+
+.input-effect:hover {
+  border-color: #00ffff;
+}
+
+.input-effect:focus {
+  border-color: dodgerblue;
+}
+.input-effect:focus ~ .label-effect {
+  top: -12px;
+  left: 3px;
+  font-size: 11px;
+}
+
+.created-at {
+  color: skyblue;
 }
 
 .btn {
@@ -202,7 +242,7 @@ h3 {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #000 transparent #555 transparent;
+  border-color: dodgerblue transparent #00ffff transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
